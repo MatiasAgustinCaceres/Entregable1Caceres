@@ -1,3 +1,4 @@
 import * as funciones from './Utilities.js';
 
-funciones.mensajeDeBienvenida;
+const profesionElecta = funciones.mensajeDeBienvenida();
+funciones.eleccionDeEspecializacion(profesionElecta);

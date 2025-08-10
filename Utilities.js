@@ -12,7 +12,7 @@ const especializaciones = [
 ];
 
 
-// ------------------------ Funciones Complementarias ------------------------
+// ------------------------ Funciones Complementarias -------------------------
 function casteoANombrePropio(profesionElecta){
     switch (profesionElecta){
         case 1:
@@ -44,7 +44,7 @@ function mensajeDeEleccionDeEspecializacion(especializacionesFiltradas, profesio
 }
 
 
-// ------------------------ Funciones Exportadas ------------------------
+// ------------------------ Funciones Exportadas -------------------------
 export function mensajeDeBienvenida(){
     let nombre;
     let continuar;

@@ -12,26 +12,8 @@ const especializaciones = [
 ];
 
 
-// ------------------------ Funciones ------------------------
-export function mensajeDeBienvenida(){
-    let opcionElecta = parseInt(prompt(`Bienvenido a "RPG Academy". Priemro, necesitamos que elijas una profesión: \n
-            1- Guerrero. 
-            2- Mago. 
-            3- Pícaro. 
-        `));
-
-    while(!opcionElecta || opcionElecta < 1 || opcionElecta > 3 ){
-        opcionElecta = parseInt(prompt(` Por favor, ingresá una de las opciónes correcas: \n
-            1- Guerrero. 
-            2- Mago. 
-            3- Pícaro. 
-        `));
-    }
-    return opcionElecta;
-}
-
+// ------------------------ Funciones Complementarias ------------------------
 function casteoANombrePropio(profesionElecta){
-
     switch (profesionElecta){
         case 1:
             profesionElecta = "Guerrero";
@@ -50,23 +32,38 @@ function casteoANombrePropio(profesionElecta){
 }
 
 function mensajeDeEleccionDeEspecializacion(especializacionesFiltradas, profesionElecta){
-
+    let especializacionElecta;
     let mensaje = `Has elegido ser un ${profesionElecta}. Como regalo de bienvenida te daremos 100 Créditos para que elijas una especialización: \n 
+        1- ${especializacionesFiltradas[0].nombre}. Costo: ${especializacionesFiltradas[0].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[0].descripción}\n
+        2- ${especializacionesFiltradas[1].nombre}. Costo: ${especializacionesFiltradas[1].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[1].descripción}\n
+        3- ${especializacionesFiltradas[2].nombre}. Costo: ${especializacionesFiltradas[2].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[2].descripción}\n`;
+    do {
+        especializacionElecta = parseInt(prompt(mensaje));
+    } while (!especializacionElecta || especializacionElecta < 1 || especializacionElecta > 3 );
+    return especializacionesFiltradas[especializacionElecta - 1];
+}
 
-        1- ${especializacionesFiltradas[0].nombre}. Costo: ${especializacionesFiltradas[0].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[0].descripción}
-        2- ${especializacionesFiltradas[1].nombre}. Costo: ${especializacionesFiltradas[1].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[1].descripción}
-        3- ${especializacionesFiltradas[2].nombre}. Costo: ${especializacionesFiltradas[2].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[2].descripción}`
 
-    let especializacionElecta = parseInt(prompt(mensaje));
+// ------------------------ Funciones Exportadas ------------------------
 
-    return especializacionElecta;
+export function mensajeDeBienvenida(){
+    let opcionElecta = parseInt(prompt(`Bienvenido a "RPG Academy". Priemro, necesitamos que elijas una profesión: \n
+            1- Guerrero. 
+            2- Mago. 
+            3- Pícaro. 
+        `));
+    while(!opcionElecta || opcionElecta < 1 || opcionElecta > 3 ){
+        opcionElecta = parseInt(prompt(` Por favor, ingresá una de las opciónes correcas: \n
+            1- Guerrero. 
+            2- Mago. 
+            3- Pícaro. 
+        `));
+    }
+    return opcionElecta;
 }
 
 export function eleccionDeEspecializacion(profesionElecta){
-
     profesionElecta = casteoANombrePropio(profesionElecta);
-
     const especializacionesFiltradas = especializaciones.filter(especializacion => especializacion.profesion === profesionElecta);
-    mensajeDeEleccionDeEspecializacion(especializacionesFiltradas, profesionElecta);
-
+    return mensajeDeEleccionDeEspecializacion(especializacionesFiltradas, profesionElecta);
 }

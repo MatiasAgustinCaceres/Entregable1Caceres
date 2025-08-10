@@ -33,7 +33,7 @@ function casteoANombrePropio(profesionElecta){
 
 function mensajeDeEleccionDeEspecializacion(especializacionesFiltradas, profesionElecta){
     let especializacionElecta;
-    let mensaje = `Has elegido ser un ${profesionElecta}. Como regalo de bienvenida te daremos 100 Créditos para que elijas una especialización: \n 
+    let mensaje = `Has elegido ser un ${profesionElecta}. Como regalo de bienvenida te daremos 100 Créditos para que elijas un arma que te acompañará en tu camino: \n 
         1- ${especializacionesFiltradas[0].nombre}. Costo: ${especializacionesFiltradas[0].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[0].descripción}\n
         2- ${especializacionesFiltradas[1].nombre}. Costo: ${especializacionesFiltradas[1].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[1].descripción}\n
         3- ${especializacionesFiltradas[2].nombre}. Costo: ${especializacionesFiltradas[2].creditosRequeridos} Créditos.\n ${especializacionesFiltradas[2].descripción}\n`;
@@ -45,8 +45,17 @@ function mensajeDeEleccionDeEspecializacion(especializacionesFiltradas, profesio
 
 
 // ------------------------ Funciones Exportadas ------------------------
-
 export function mensajeDeBienvenida(){
+    let nombre;
+    let continuar;
+    do {
+        nombre = prompt(`Bienvenido a "RPG Academy". Cuál es tu nombre?`);
+        continuar = confirm (`Estas seguro que "${nombre}" es tu nombre?`);
+    } while (!continuar);    
+    return nombre;
+}
+
+export function mensajeDeEleccionDeProfesion(){
     let opcionElecta = parseInt(prompt(`Bienvenido a "RPG Academy". Priemro, necesitamos que elijas una profesión: \n
             1- Guerrero. 
             2- Mago. 
@@ -66,4 +75,19 @@ export function eleccionDeEspecializacion(profesionElecta){
     profesionElecta = casteoANombrePropio(profesionElecta);
     const especializacionesFiltradas = especializaciones.filter(especializacion => especializacion.profesion === profesionElecta);
     return mensajeDeEleccionDeEspecializacion(especializacionesFiltradas, profesionElecta);
+}
+
+export function calculoDeCreditos(costo){
+    return 100 - costo; 
+}
+
+export function mostrarCredencial(nombre, profesion, arma, saldoDeCreditos){
+    let mensaje = `Grandioso! Aquí está tu nueva credencial.\n
+        ------------------------------- 
+        | Nombre: ${nombre}.           
+        | Profesión: ${profesion}.
+        | Arma: ${arma}.    
+        | Saldo: ${saldoDeCreditos}.  
+        ------------------------------- `
+    return mensaje; 
 }
